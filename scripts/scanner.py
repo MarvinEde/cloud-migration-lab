@@ -10,11 +10,15 @@ def scan_repository():
 
     # Parcours de tous les fichiers du projet
     for root, dirs, files in os.walk('.'):
-        if ".git" in root or "scripts" in root:
+        if ".git" in root:
             continue  # Ignorer le dossier .git
 
         for file in files:
             file_path = os.path.join(root, file)
+
+            if file == "scanner.py":
+                continue  # Ignorer le script de scan lui-même
+
             _, ext = os.path.splitext(file)
 
             # Vérification des extensions interdites
