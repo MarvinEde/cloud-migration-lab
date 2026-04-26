@@ -10,7 +10,7 @@ def scan_repository():
 
     # Parcours de tous les fichiers du projet
     for root, dirs, files in os.walk('.'):
-        if ".git" in root:
+        if ".git" in root or "scripts" in root:
             continue  # Ignorer le dossier .git
 
         for file in files:
