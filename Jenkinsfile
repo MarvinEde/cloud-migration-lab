@@ -15,6 +15,14 @@ pipeline {
                 sh 'python3 scripts/scanner.py'
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                echo 'Construction de l image Docker...'
+                dir('app_cobaye') {
+                    sh 'docker build -t app_cobaye:latest .'
+                }
+            }
+        }
     }
     post {
         success {
