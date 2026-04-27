@@ -1,4 +1,6 @@
 import os 
+import sys
+
 
 #je fais une liste des extensions ou fichiers sensibles (cle,mdp, ect)
 FORBIDDEN_EXTENSIONS = ['.key', '.pem', '.p12', '.pfx', '.crt', '.csr', '.ovpn', '.conf', '.cfg', '.ini', '.log', '.bak', '.backup']
@@ -42,4 +44,11 @@ def scan_repository():
         return False
     
 if __name__ == "__main__":
-    scan_repository()
+    is_safe = scan_repository()
+    
+    if not is_safe:
+        print("BUILD REJETEE : Des problèmes de sécurité ont été détectés.")
+        sys.exit(1)  # Sortie avec code d'erreur pour indiquer l'échec du build
+    else:
+        print("BUILD ACCEPTÉE : Aucun problème de sécurité détecté.")
+        sys.exit(0)  # Sortie avec code de succès pour indiquer que le build peut continuer
